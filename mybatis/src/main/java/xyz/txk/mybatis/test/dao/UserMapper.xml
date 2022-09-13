@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.txk.mybatis.test.dao.UserMapper">
+    <select id="getUserList"  resultType="xyz.txk.mybatis.test.pojo.User" >
+        select * from mybatis.users;
+    </select>
+    <select id="getUserByID" parameterType="int" resultType="xyz.txk.mybatis.test.pojo.User">
+        select * from mybatis.users where id=#{id}
+    </select>
+    <insert id="addUser" parameterType="xyz.txk.mybatis.test.pojo.User">
+        insert into mybatis.users (`id`,`name`,`pwd`) values (#{id},#{name},#{pwd});
+    </insert>
+    <update id="changeUser" parameterType="xyz.txk.mybatis.test.pojo.User">
+        update mybatis.users set `name`=#{name},`pwd`=#{pwd} where `id`=#{id};
+    </update>
+    <delete id="delUser" parameterType="int">
+        delete from mybatis.users where `id`=#{id};
+    </delete>
+
+    <select id="getUserInList" parameterType="int">
+        select * from mybatis.users where `id` in (
+        <foreach item="ids" collection="list" separator="," open="" close="">
+            #{ids}
+        </foreach>
+        )
+    </select>
+
+
+    <insert id="addUser2" parameterType="Map">
+        insert into mybatis.users (`id`,`name`,`pwd`) values (#{userid},#{username},#{userpwd});
+    </insert>
+    <select id="getUserByID2" parameterType="Map" resultType="Object">
+        select * from mybatis.users where id=#{userid}
+    </select>
+</mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.txk.mybatis.test.dao.InjectionMapper">
+    <select id="getTestByID" parameterType="String" resultType="xyz.txk.mybatis.test.pojo.injection">
+        select * from mybatis.test where id=#{id}
+    </select>
+    <select id="getTestLikeName" parameterType="String" resultType="xyz.txk.mybatis.test.pojo.injection">
+        select * from mybatis.test where name like concat('%',#{name},'%');
+    </select>
+</mapper>
